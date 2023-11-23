@@ -1,4 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     if(location.href.includes('login.html')){
         if(localStorage.getItem('SESSION_TRANSPORT')){
             location.href=`./dashboard.html`;
@@ -14,7 +16,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 const formulaire=document.getElementById('formulaireAdd');
                 const formData=new FormData(formulaire);
                 const data=new URLSearchParams(formData);
-                await fetch(`http://localhost:3000/api/loginAdmin`, {
+                await fetch(`${production_api_url}loginAdmin`, {
                     method:'POST',
                     body:data
                 })
@@ -65,7 +67,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 const formulaire=document.getElementById('formulaireAdd');
                 const formData=new FormData(formulaire);
                 const data=new URLSearchParams(formData);
-                await fetch(`http://localhost:3000/api/loginMachiniste`, {
+                await fetch(`${production_api_url}loginMachiniste`, {
                     method:'POST',
                     body:data
                 })
@@ -117,7 +119,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 const formulaire=document.getElementById('formulaireAdd');
                 const formData=new FormData(formulaire);
                 const data=new URLSearchParams(formData);
-                await fetch(`http://localhost:3000/api/loginPassager`, {
+                await fetch(`${production_api_url}loginPassager`, {
                     method:'POST',
                     body:data
                 })

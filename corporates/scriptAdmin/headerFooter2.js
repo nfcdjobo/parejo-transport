@@ -1,4 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     function headerFooter(url){
         try {
             fetch(url)
@@ -25,5 +27,5 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             console.log('error', error)
         }
     }
-    headerFooter('http://localhost:3000/api/getAllCompagny')
+    headerFooter(production_api_url+'getAllCompagny')
 })

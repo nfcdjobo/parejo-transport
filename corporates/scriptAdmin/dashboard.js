@@ -1,4 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     
     if(!localStorage.SESSION_TRANSPORT){
         location.href='./login.html';
@@ -17,7 +19,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
         const carProgestion = document.getElementById('carProgestion');
         $.ajax({
             type:`GET`,
-            url:`http://localhost:3000/api/getAllAdmin`,
+            url:`${production_api_url}getAllAdmin`,
             headers: { Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
         })
         .then(response=>{
@@ -30,7 +32,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
         $.ajax({
             type:`GET`,
-            url:`http://localhost:3000/api/getAllMachiniste`,
+            url:`${production_api_url}getAllMachiniste`,
             headers: { Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
         })
         .then(response=>{
@@ -42,7 +44,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
         $.ajax({
             type:`GET`,
-            url:`http://localhost:3000/api/getAllCare`,
+            url:`${production_api_url}getAllCare`,
             headers: { Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
         })
         .then(response=>{

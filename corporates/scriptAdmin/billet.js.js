@@ -1,21 +1,23 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
-    const imgPath='../../logics/'
+    const imgPath='../../logics/';
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     let tot_do_list_tikect=document.getElementById('tot-do-list-tikect');
     let printed="";
-        fetch('http://localhost:3000/api/getAllReservation')
+        fetch(production_api_url+'getAllReservation')
         .then(res=>res.json())
         .then(succes=>{
             
             const reservate=succes.reservation;
             reservate.forEach(reservation => {
-                fetch(`http://localhost:3000/api/getByIdPassager/${reservation.passage_id[0]}`,{
+                fetch(`${production_api_url}getByIdPassager/${reservation.passage_id[0]}`,{
                     method:'GET',
                     headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
                 })
                 .then(pas=>pas.json())
                 .then(pass=>{
                     const passager=pass.data;
-                    fetch(`http://localhost:3000/api/getByIdLigne/${reservation.ligne_id[0]}`, {
+                    fetch(`${production_api_url}getByIdLigne/${reservation.ligne_id[0]}`, {
                         method:'GET',
                         headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
                     })
@@ -62,7 +64,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
             function generatePDF(event){
                 const id=event.target.id;
-                fetch("http://localhost:3000/api/getAllCompagny")
+                fetch(production_api_url+"getAllCompagny")
                 .then(res=>res.json())
                 .then(succes=>{
                     const compagny=succes.data[0]

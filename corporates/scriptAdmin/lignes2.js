@@ -1,9 +1,11 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     const breadcumbArea=document.querySelector('.breadcumb-area');
     console.log(breadcumbArea)
     breadcumbArea.style.backgroundImage="url('./image/ligne.jpg')";
-
-    fetch('http://localhost:3000/api/getAllLigne')
+    
+    fetch(production_api_url+'getAllLigne')
     .then(res=>res.json())
     .then(succes=>{
         const data=succes.data

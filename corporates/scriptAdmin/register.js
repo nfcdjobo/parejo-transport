@@ -1,4 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     const logins=document.getElementById('logins');
     logins.style.cursor='pointer';
     if(location.href.includes(`register.html`)){
@@ -20,7 +22,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 formData.append('telephone', telephone);
                 formData.append('password', password)
                 if(photo){formData.append('photo', photo)}
-                let all= await fetch('http://localhost:3000/api/saveAdmin', {
+                let all= await fetch(production_api_url+'saveAdmin', {
                     method:'POST',
                     body: formData
                 })
@@ -68,7 +70,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 formData.append('telephone', telephone);
                 formData.append('password', password)
                 if(photo){formData.append('photo', photo)}
-                let all= await fetch('http://localhost:3000/api/saveMachiniste', {
+                let all= await fetch(production_api_url+'saveMachiniste', {
                     method:'POST',
                     body: formData
                 })
@@ -117,7 +119,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 formData.append('telephone', telephone);
                 formData.append('password', password)
                 if(photo){formData.append('photo', photo)}
-                let all= await fetch('http://localhost:3000/api/savePassager', {
+                let all= await fetch(production_api_url+'savePassager', {
                     method:'POST',
                     body: formData
                 })

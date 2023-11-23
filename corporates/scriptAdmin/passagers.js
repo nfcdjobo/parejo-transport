@@ -1,5 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
-    
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
 
     if(!localStorage.SESSION_TRANSPORT){
         location.href='./login3.html';
@@ -21,7 +22,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 if(confirm(`Êtes-vous sûre de vouloir supprimer cet utilisateur ?`)){
                     $.ajax({
                         type:`POST`,
-                        url:`http://localhost:3000/api/deletePassager`,
+                        url:`${production_api_url}deletePassager`,
                         data:`id=${event.target.id}`,
                         headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
                     })
@@ -46,7 +47,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
             $.ajax({
                 type:`GET`,
-                url:`http://localhost:3000/api/getAllPassager`,
+                url:`${production_api_url}getAllPassager`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .done(response=>{
@@ -94,7 +95,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             });
             $.ajax({
                 type:`GET`,
-                url:`http://localhost:3000/api/getByIdPassager/${location.href.split('#')[1]}`,
+                url:`${production_api_url}getByIdPassager/${location.href.split('#')[1]}`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .then(response=>{
@@ -121,7 +122,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 formData.append('telephone', telephone);
                 if(photo){formData.append('photo', photo)}
                 formData.append('id', id);
-                let all= await fetch('http://localhost:3000/api/updatePassager', {
+                let all= await fetch(production_api_url+'updatePassager', {
                     method: 'POST',
                     body: formData,
                     headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}

@@ -1,4 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     if(localStorage.SESSION_TRANSPORT){
         const donneesLocal=JSON.parse(localStorage.SESSION_TRANSPORT);
         const today=new Date();

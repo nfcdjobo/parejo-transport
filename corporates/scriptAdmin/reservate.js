@@ -1,4 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     const breadcumbArea=document.querySelector('.breadcumb-area');
     breadcumbArea.style.backgroundImage="url('./image/revervate.jpg')";
 
@@ -31,7 +33,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
     //     location.href='profile2.html'
     // }
 
-    fetch('http://localhost:3000/api/getAllLigne')
+    fetch(production_api_url+'getAllLigne')
     .then(res=>res.json())
     .then(succes=>{
         const data=succes.data;
@@ -89,13 +91,12 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
         const formulaire=document.getElementById('formulaireAdd');
         const formData=new FormData(formulaire);
         const data=new URLSearchParams(formData);
-        await fetch("http://localhost:3000/api/saveReservation", {
+        await fetch(production_api_url+"saveReservation", {
             method:'POST',
             body:data
         })
         .then(res=>res.json())
         .then(succes=>{
-            console.log('°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°',succes)
             document.querySelectorAll('#formulaireAdd input').forEach(item=>item.value="");
             alerter.hidden=false;
             alert.className="alert alert-info";

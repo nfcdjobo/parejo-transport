@@ -1,11 +1,11 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
-    
-    
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     let smallSlider=document.getElementById('smallSlider');
     const imgPath='../logics/';
     $.ajax({
         type:`GET`,
-        url:`http://localhost:3000/api/getLigne`
+        url:`${production_api_url}getLigne`
     })
     .done(response=>{
         let ligne=response.data;

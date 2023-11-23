@@ -1,6 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
-    
-    
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     if(!localStorage.SESSION_TRANSPORT){
         location.href='./login.html';
     }else{
@@ -21,7 +21,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 if(confirm(`Êtes-vous sûre de vouloir supprimer cet utilisateur ?`)){
                     $.ajax({
                         type:`POST`,
-                        url:`http://localhost:3000/api/deleteMachiniste`,
+                        url:`${production_api_url}deleteMachiniste`,
                         data:`id=${event.target.id}`,
                         headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
                     })
@@ -48,7 +48,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
             $.ajax({
                 type:`GET`,
-                url:`http://localhost:3000/api/getAllMachiniste`,
+                url:`${production_api_url}getAllMachiniste`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .done(response=>{
@@ -102,7 +102,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 formData.append('password', password)
                 formData.append('role', role);
                 if(photo){formData.append('photo', photo)}
-                let all= await fetch('http://localhost:3000/api/saveMachiniste', {
+                let all= await fetch(production_api_url+'saveMachiniste', {
                     method: 'POST',
                     body: formData,
                     headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -143,7 +143,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             });
             $.ajax({
                 type:`GET`,
-                url:`http://localhost:3000/api/getByIdMachiniste/${location.href.split('#')[1]}`,
+                url:`${production_api_url}getByIdMachiniste/${location.href.split('#')[1]}`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .then(response=>{
@@ -172,7 +172,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 formData.append('role', role);
                 if(photo){formData.append('photo', photo)}
                 formData.append('id', id);
-                let all= await fetch('http://localhost:3000/api/updatemachiniste', {
+                let all= await fetch(production_api_url+'updatemachiniste', {
                     method: 'POST',
                     body: formData,
                     headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}

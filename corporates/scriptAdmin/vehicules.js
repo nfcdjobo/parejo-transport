@@ -12,6 +12,9 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
     //         },500)
     //     }
     // }
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
+    
     
     if(!localStorage.SESSION_TRANSPORT){
         location.href='./login.html';
@@ -34,7 +37,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             if(confirm(`Êtes-vous sûre de vouloir supprimer les données de cette voiture ?`)){
                 $.ajax({
                     type:`POST`,
-                    url:`http://localhost:3000/api/deleteCar`,
+                    url:`${production_api_url}deleteCar`,
                     data:`id=${event.target.id}`,
                     headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
                 })
@@ -61,14 +64,14 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
         $.ajax({
             type:`GET`,
-            url:`http://localhost:3000/api/getAllCar`,
+            url:`${production_api_url}getAllCar`,
             headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
         })
         .done(response=>{
             const vehicule=response.data;
             $.ajax({
                 type:`GET`,
-                url:`http://localhost:3000/api/getAllLigne`,
+                url:`${production_api_url}getAllLigne`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .done(res=>{
@@ -91,9 +94,6 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
         let climatisation = "NON"
         params.forEach((element, key) => {
             const my_ligne=other.filter(item=>item._id==element.ligne_id[0])[0];
-            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',my_ligne)
-
-
             
             if(element) climatisation = "OUI";
             my_tbody.innerHTML+=
@@ -123,7 +123,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
         
         $.ajax({
             type:`GET`,
-            url:`http://localhost:3000/api/getByIdCar/${location.href.split('#')[1]}`,
+            url:`${production_api_url}getByIdCar/${location.href.split('#')[1]}`,
             headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
         })
         .then(response=>{
@@ -143,7 +143,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             
             $.ajax({
                 type:'GET',
-                url:`http://localhost:3000/api/getAllLigne`,
+                url:`${production_api_url}getAllLigne`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .done(res=>{
@@ -178,7 +178,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             formData.append('ligne_id', ligne_id);
             if(photo){formData.append('photo', photo)}
             formData.append('id', id);
-            let all= await fetch('http://localhost:3000/api/updateCar', {
+            let all= await fetch(production_api_url+'updateCar', {
                 method: 'POST',
                 body: formData,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -226,7 +226,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             formData.append('climatisation', climatisation);
             formData.append('photo', photo);
             formData.append('ligne_id', ligne_id);
-            let all= await fetch('http://localhost:3000/api/saveCar', {
+            let all= await fetch(production_api_url+'saveCar', {
                 method: 'POST',
                 body: formData,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -255,7 +255,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
         $.ajax({
             type:`GET`,
-            url:`http://localhost:3000/api/getAllLigne`,
+            url:`${production_api_url}getAllLigne`,
             headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
         })
         .done(response=>{

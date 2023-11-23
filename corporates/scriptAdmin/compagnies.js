@@ -11,6 +11,8 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
     //         },500)
     //     }
     // }
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     if(!localStorage.SESSION_TRANSPORT){
         location.href='./login.html';
     }else{
@@ -58,7 +60,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                         formData.append('telephone', telephone);
                         formData.append('copyright', copyright);
 
-                        let all = await fetch('http://localhost:3000/api/saveCompagny', {
+                        let all = await fetch(production_api_url+'saveCompagny', {
                             method:'POST',
                             body:formData,
                             headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -118,7 +120,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                         formData.append('copyright', copyright);
                         formData.append('id', id);
 
-                        let all = await fetch('http://localhost:3000/api/updateCompagny', {
+                        let all = await fetch(production_api_url+'updateCompagny', {
                             method:'POST',
                             body:formData,
                             headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -146,7 +148,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
         
         
 
-        fetch('http://localhost:3000/api/getAllCompagny', {
+        fetch(production_api_url+'getAllCompagny', {
             method:'GET',
             headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
         })

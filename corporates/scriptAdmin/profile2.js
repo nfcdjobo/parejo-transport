@@ -1,4 +1,6 @@
 window.addEventListener(`DOMContentLoaded`, (e)=>{
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
     const [myPhoto, myName, myEmail, myTelephone, myRole, myPhotoProfil, adminName]=[
         document.getElementById('my-photo'),
         document.getElementById('my-name'),
@@ -47,7 +49,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
         formData.append('email', email);
         if(photo){formData.append('photo', photo)};
         if(code.includes("ADMIN")){
-            fetch('http://localhost:3000/api/updateAdmin', {
+            fetch(production_api_url+'updateAdmin', {
                 method:'POST',
                 body:formData,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -66,7 +68,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             })
         }
         else if(code.includes("PASSAG")){
-            fetch('http://localhost:3000/api/updatePassager2', {
+            fetch(production_api_url+'updatePassager2', {
                 method:'POST',
                 body:formData,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -85,7 +87,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             })
         }
         else{
-            fetch('http://localhost:3000/api/updateMachiniste2', {
+            fetch(production_api_url+'updateMachiniste2', {
                 method:'POST',
                 body:formData,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -132,7 +134,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
         console.log(data)
         
         if(code.includes('ADMIN')){
-            fetch('http://localhost:3000/api/updatedAdmin', {
+            fetch(production_api_url+'updatedAdmin', {
                 method:'POST',
                 body: data
             })
@@ -163,7 +165,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             })
         }
         else if(code.includes('MACHIN')){
-            fetch('http://localhost:3000/api/updatedMachiniste', {
+            fetch(production_api_url+'updatedMachiniste', {
                 method:'POST',
                 body: data
             })
@@ -194,7 +196,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
             })
             
         }else if(code.includes('PASSAG')){
-            fetch('http://localhost:3000/api/updatedPassager', {
+            fetch(production_api_url+'updatedPassager', {
                 method:'POST',
                 body: data
             })

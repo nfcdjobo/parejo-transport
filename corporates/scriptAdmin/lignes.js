@@ -17,6 +17,9 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
     //     }
     // }
 
+    const production_api_url = 'https://transport-severvice.onrender.com/api/';
+    const development_api_url = 'http://localhost:3000/api/';
+
     if(!localStorage.SESSION_TRANSPORT){
         location.href='./login.html';
     }else{
@@ -37,7 +40,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 if(confirm(`Êtes-vous sûre de vouloir supprimer cet utilisateur ?`)){
                     $.ajax({
                         type:`POST`,
-                        url:`http://localhost:3000/api/deleteLigne`,
+                        url:`${production_api_url}deleteLigne`,
                         data:`id=${event.target.id}`,
                         headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
                     })
@@ -63,7 +66,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
             $.ajax({
                 type:`GET`,
-                url:`http://localhost:3000/api/getAllLigne`,
+                url:`${production_api_url}getAllLigne`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .done(response=>{
@@ -107,7 +110,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
 
             $.ajax({
                 type:`GET`,
-                url:`http://localhost:3000/api/getByIdLigne/${location.href.split('#')[1]}`,
+                url:`${production_api_url}getByIdLigne/${location.href.split('#')[1]}`,
                 headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
             })
             .then(response=>{
@@ -138,7 +141,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 if(photo){formData.append('photo', photo)}
                 formData.append('id', id);
                 console.log(JSON.parse(localStorage.SESSION_TRANSPORT))
-                let all= await fetch('http://localhost:3000/api/updateLigne', {
+                let all= await fetch(production_api_url+'updateLigne', {
                     method: 'POST',
                     body: formData,
                     headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
@@ -186,7 +189,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 formData.append('distance', distance);
                 formData.append('montant', montant);
                 formData.append('photo', photo);
-                let all= await fetch('http://localhost:3000/api/saveLigne', {
+                let all= await fetch(production_api_url+'saveLigne', {
                     method: 'POST',
                     body: formData,
                     headers: {Authorization: `token ${JSON.parse(localStorage.SESSION_TRANSPORT).body.token}`}
