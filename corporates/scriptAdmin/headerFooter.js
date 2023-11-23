@@ -3,7 +3,6 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
     const development_api_url = 'http://localhost:3000/api/';
     function headerFooter(url){
         try {
-            
             fetch(url)
             .then(res=>res.json())
             .then(succes=>{
@@ -26,17 +25,14 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                     }
                     copyright.innerHTML=compagie.copyright;
                     
-                    let imgPath= location.href.includes('views/index.html')? '../logics/':'./../../logics/'
+                    let imgPath= location.href.includes('views/index.html')? '../logics/' : './../../logics/';
                     document.querySelectorAll('img[logo=my-logo]').forEach(item=>item.src=imgPath+compagie.photo);
-                    phtoUser.src=imgPath+JSON.parse(localStorage.SESSION_TRANSPORT).body.user.photo;
-                    adminName.textContent=JSON.parse(localStorage.SESSION_TRANSPORT).body.user.nomPrenom.split(' ').slice(0, 2);
+                    if(localStorage.SESSION_TRANSPORT && phtoUser){
+                        phtoUser.src = imgPath+JSON.parse(localStorage.SESSION_TRANSPORT).body.user.photo;
+                    }
+                    adminName.textContent=localStorage.SESSION_TRANSPORT ? JSON.parse(localStorage.SESSION_TRANSPORT).body.user.nomPrenom.split(' ').slice(0, 2): '';
                 }
                 
-                
-                console.log('succes',succes);
-            })
-            .catch(fail=>{
-                console.log('fail', fail)
             })
         } catch (error) {
             console.log('error', error)
