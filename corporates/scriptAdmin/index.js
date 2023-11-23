@@ -9,9 +9,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
     })
     .done(response=>{
         let ligne=response.data;
-        console.log(ligne)
         smallSlider.textContent='';
-        console.log('ligne.slice(0,4)',ligne.slice(0,4))
         ligne.slice(0,4).forEach(element => {
             smallSlider.innerHTML+=`
             <!-- edupit_image_box_01-->

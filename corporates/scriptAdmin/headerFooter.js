@@ -13,7 +13,7 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                 const UrgencePhone=document.getElementById('UrgencePhone');
                 const copyright=document.getElementById('copyright');
                 const phtoUser=document.getElementById('phto-user');
-                const adminName=document.querySelector('.admin-name');
+                const adminName= document.querySelector('.admin-name');
 
                 if(data.length>0){
                     const compagie=data[0];
@@ -30,7 +30,10 @@ window.addEventListener(`DOMContentLoaded`, (e)=>{
                     if(localStorage.SESSION_TRANSPORT && phtoUser){
                         phtoUser.src = imgPath+JSON.parse(localStorage.SESSION_TRANSPORT).body.user.photo;
                     }
-                    adminName.textContent=localStorage.SESSION_TRANSPORT ? JSON.parse(localStorage.SESSION_TRANSPORT).body.user.nomPrenom.split(' ').slice(0, 2): '';
+                    if(localStorage.SESSION_TRANSPORT && adminName){
+                        adminName.textContent=JSON.parse(localStorage.SESSION_TRANSPORT).body.user.nomPrenom.split(' ').slice(0, 2);
+                    }
+                    
                 }
                 
             })
